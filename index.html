@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MeshToken</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="body">
+
+        <h1 id="title"></h1>
+        <br>
+        <div id="author-list">
+        </div>
+        <br>
+        <div id="affiliation-list">
+        </div>
+        <div id="footnote">
+            <span ></span>
+        </div>
+        <div id="conference">
+        </div>
+        <div id="button-list">
+            <a id="paper">
+                <img src="assets/logos/arxiv-logo.svg">
+                <span>paper</span>
+            </a>
+            <a id="code">
+                <img src="assets/logos/github-mark.svg">
+                <span>code and model</span>
+            </a>
+        </div>
+
+        <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+        </head>
+
+        <head>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+        </head>
+
+        <div>
+            <p style="
+                font-size:32px; 
+                font-family: 'Dancing Script', cursive;
+                line-height: 1;
+            "> MeshToken
+            </p>
+        </div>
+
+        <div style="width: 100%; margin: 0 auto;">
+            <div style="display: flex; justify-content: center; gap: 0;">
+                <div style="width: 40%;"> <!-- 调整这个百分比控制整体大小 -->
+                    <img src="assets/imgs/demo1_walk.gif" style="width: 100%; height: auto; display: block;">
+                </div>
+                <div style="width: 40%;">
+                    <img src="assets/imgs/demo1_jog.gif" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 0;">
+                <div style="width: 40%;">
+                    <img src="assets/imgs/demo2_walk.gif" style="width: 100%; height: auto; display: block;">
+                </div>
+                <div style="width: 40%;">
+                    <img src="assets/imgs/demo2_jog.gif" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 0;">
+                <div style="width: 40%;">
+                    <img src="assets/imgs/demo3_walk.gif" style="width: 100%; height: auto; display: block;">
+                </div>
+                <div style="width: 40%;">
+                    <img src="assets/imgs/demo3_jog.gif" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+        </div>
+            
+            <br><br>
+
+            <div id='method'>
+                <h2>Abstract</h2>
+                <center><p style="max-width:900px; font-size:18px; margin:auto; text-align: justify; margin-bottom: 1em;">Diffusion models have shown remarkable success in video generation. However, whether such models are truly aware of the 3D structure underlying visual observations, rather than simply reproducing plausible 2D projections, remains an open question. In this work, we investigate this question through human motion control, a task that requires precise modelling of 3D human geometry, motion, camera viewpoint, and scene context. Unlike prior methods that rely on rendered 2D motion guidance videos, we propose a render-free framework that conditions video generation directly on compressed 3D human mesh tokens. This representation preserves full 3D geometric information while enabling a unified token-based generation pipeline that processes video tokens jointly with motion tokens in a DiT-based architecture. This design requires the model to reason jointly about appearance, 3D structure, and camera viewpoint during video generation. Experimental results demonstrate strong performance on human motion control benchmarks, while reducing artifacts induced by view-dependent 2D guidance and trajectory-pose mismatches during editing. These findings suggest that video diffusion models, when equipped with mesh tokenization, can better capture complex 3D human structures and their interactions with the surrounding environment.</p></center>
+            </div>
+            <br>
+            <div id='method'>
+                <h2>Method Overview</h2>
+                <style>
+                li {
+                margin-left: 30px;
+                }
+                </style>   
+                <p style="max-width:900px; font-size:18px; margin:auto; text-align: justify; margin-bottom: 1em;">MeshToken has two stages:</p>
+                <ol type="i">
+                    <li style="max-width:900px; font-size:18px; margin: 0 auto 1em; text-align: justify;">
+                        we first compress the human motion as tokens, from a human mesh with 6890 vertices to 54 motion tokens.
+                    </li>
+                    <li style="max-width:900px; font-size:18px; margin: 0 auto 1em; text-align: justify;">
+                        we then generate human videos conditional on the motion tokens, similar to text prompts.
+                    </li>
+                </ol>
+                
+                <img src="assets/imgs/pipeline.png" height=400>
+            </div>
+
+            <br>
+            <br>
+            <div id="results">
+                <h2>Visual Comparison on Human Motion Control</h2>
+                <div id="libby">
+                    <table style="width: 100%;margin-left:auto;margin-right:auto;">
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/1_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/2_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/3_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/4_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/5_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/6_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/7_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion/8_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        
+                      </table>
+                </div>
+            </div>
+
+            <div id="results">
+                <h2>Visual Comparison on Human Motion Editing</h2>
+                <div id="libby">
+                    <table style="width: 100%;margin-left:auto;margin-right:auto;">
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion_edit/1_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion_edit/2_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion_edit/3_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion_edit/4_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/motion_edit/5_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        
+
+                        
+                      </table>
+                </div>
+            </div>
+
+            <div id="results">
+                <h2>Visual Results for Ablation Study</h2>
+                <div id="libby">
+                    <table style="width: 100%;margin-left:auto;margin-right:auto;">
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/ablation/nomesh_nocfgmesh_ours_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/ablation/mlp_ours_GT_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/ablation/para_ours_GT_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/ablation/nocfgtraj_ours_GT_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="682">
+                                    <source src="assets/videos/ablation/notraj_nocameratraj_noworldtraj_ours_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        
+                      </table>
+                </div>
+            </div>
+
+            <div id="results">
+                <h2>Failure Cases</h2>
+                <div id="libby">
+                    <table style="width: 100%;margin-left:auto;margin-right:auto;">
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/failure_case/1_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                               <video autoplay muted loop width="1024">
+                                    <source src="assets/videos/failure_case/2_stacked_labeled.mp4">
+                                </video>
+                            </th>
+                        </tr>
+                        
+                      </table>
+                </div>
+            </div>
+
+            
+            <p class="section">&nbsp;</p>
+            <h2>Bibtex</h2>
+            <table border="0">
+                <tbody>
+                    <pre style="
+                        display: block;
+                        background: #eee;
+                        white-space: pre;
+                        -webkit-overflow-scrolling: touch;
+                        max-width: 100%;
+                        min-width: 100px;
+                        border-radius: 20px;
+                        text-align: left;
+                        font-size: 15px;
+                        padding: 10px 40px; /* 左右40px 留白，按需改数值 */
+                    ">
+            @article{liang2026towards,
+                title={Towards 3D-Aware Video Diffusion Models: Render-Free Human Motion Control with Mesh Tokenization},
+                author={Liang, Jingyun and Wei, Min and Li, Shikai and Han, Yizeng and Yuan, Hangjie and Sun, Lei and Chen, Weihua and Wang, Fan},
+                journal={arXiv preprint arXiv:2606.00000},
+                year={2026}}
+                    </pre>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+    <!-- <script type="text/javascript" src="cocoen.js"></script> -->
+    <!-- <script>
+        Cocoen.parse(document.body);
+    </script> -->
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <a class="icon-link"
+             href="https://arxiv.org/pdf/2606.00000">
+            <i class="fas fa-file-pdf"></i>
+          </a>
+          <a class="icon-link" href="https://github.com/jingyunliang" class="external-link" disabled>
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This website is based on <a href="https://duyguceylan.github.io/pix2video.github.io">pix2video</a>, licensed under a <a rel="license"
+                                                    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+</body>
