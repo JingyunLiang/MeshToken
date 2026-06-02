@@ -136,7 +136,7 @@ make_site({
      "affiliations": ["DAMO Academy, Alibaba Group", "Hupan Lab", "INSAIT", "Zhejiang University"],
     "footnote": [""],
     "URLs": {
-        "paper": "https://arxiv.org/pdf/2605.00000",
+        "paper": "https://arxiv.org/pdf/2606.02000",
         "code": "https://github.com/JingyunLiang/MeshToken",
     },
 })
